@@ -3,16 +3,16 @@
 Installing Jupiter on Amazon EC2 
 
 ##I - Anaconda install on EC2 (ubuntu instance)
-  '''sh
+  ```sh
   cd ~
   wget https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh
   bash Anaconda3-4.2.0-Linux-x86_64.sh -b
   echo 'PATH="/home/ubuntu/anaconda3/bin:$PATH"' >> .bashrc
   source ~/.bashrc
-  '''
+  ```
 
 ##II - jupyter setup
-  '''sh
+  ```sh
   conda update jupyter
   jupyter notebook --generate-config
 
@@ -33,12 +33,12 @@ Installing Jupiter on Amazon EC2
   config.NotebookApp.open_browser = False\\
   config.NotebookApp.password = u'$key'\\
   config.NotebookApp.port = 8889" .jupyter/jupyter_notebook_config.py
-  '''
+  ```
  
 ##III - Launch jupyter 
-  '''sh
+  ```sh
   cd ~
   mkdir notebook_root
   cd notebook_root
   jupyter notebook_root
-  '''
+  ```
