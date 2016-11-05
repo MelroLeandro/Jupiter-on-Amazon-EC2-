@@ -40,5 +40,5 @@ Installing Jupiter on Amazon EC2
   cd ~
   mkdir notebook_root
   cd notebook_root
-  jupyter notebook_root
+  jupyter notebook
   ```
