@@ -42,3 +42,29 @@ Installing Jupiter on Amazon EC2
   cd notebook_root
   jupyter notebook
   ```
+
+# Installing TensorFlow on an AWS EC2 Instance with GPU Support
+
+The following things are installed:
+
+    Essentials
+    Cuda Toolkit 7.0
+    cuDNN Toolkit 6.5
+    Bazel 0.1.4 (Java 8 is a dependency)
+    TensorFlow 0.6
+
+After launching your instance g2.2xlarge  using the Ubuntu Server 14, install the essentials :
+```
+  sudo apt-get update
+  sudo apt-get upgrade
+  sudo apt-get install -y build-essential git python-pip libfreetype6-dev libxft-dev libncurses-dev libopenblas-dev gfortran python-matplotlib libblas-dev liblapack-dev libatlas-base-dev python-dev python-pydot linux-headers-generic linux-image-extra-virtual unzip python-numpy swig python-pandas python-sklearn unzip wget pkg-config zip g++ zlib1g-dev
+  sudo pip install -U pip
+  ```
+ TensorFlow requires installing CUDA Toolkit 7.0. To do this, run:
+ ```
+  wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1410/x86_64/cuda-repo-ubuntu1410_7.0-28_amd64.deb
+  sudo dpkg -i cuda-repo-ubuntu1410_7.0-28_amd64.deb
+  rm cuda-repo-ubuntu1410_7.0-28_amd64.deb
+  sudo apt-get update
+  sudo apt-get install -y cuda
+```
