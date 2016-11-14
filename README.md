@@ -68,3 +68,20 @@ After launching your instance g2.2xlarge  using the Ubuntu Server 14, install th
   sudo apt-get update
   sudo apt-get install -y cuda
 ```
+# Making an Amazon EBS Volume Available for Use
+
+  To make an EBS volume available for use on Linux
+  
+ 1. Connect to your instance using SSH. For more information, see Step 2: Connect to Your Instance.
+ 2. Use the lsblk command to view your available disk devices and their mount points (if applicable) to help you determine the correct device name to use.
+ '''
+  [ec2-user ~]$ lsblk
+  NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+  xvdf  202:80   0  100G  0 disk
+  xvda1 202:1    0    8G  0 disk /
+ '''
+ The output of lsblk removes the /dev/ prefix from full device paths. In this example, /dev/xvda1 is mounted as the root device (note the MOUNTPOINT is listed as /, the root of the Linux file system hierarchy), and /dev/xvdf is attached, but it has not been mounted yet.
+ 3. Determine whether you need to create a file system on the volume. Use the sudo file -s device command to list special information, such as file system type.
+ '''
+ 
+ '''
