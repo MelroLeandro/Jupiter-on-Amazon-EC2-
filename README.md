@@ -68,6 +68,22 @@ After launching your instance g2.2xlarge  using the Ubuntu Server 14, install th
   sudo apt-get update
   sudo apt-get install -y cuda
 ```
+# XGBoost on AWS
+
+ ```
+  sudo apt-get install make
+  sudo apt-get update
+  sudo apt-get install gcc
+  sudo apt-get install g++
+  sudo apt-get install git
+  sudo git clone https://github.com/dmlc/xgboost
+  cd xgboost
+  ./build.sh
+  cd python-package
+  python setup.py install
+  wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
+ ```
+ 
 # Making an Amazon EBS Volume Available for Use
 
   To make an EBS volume available for use on Linux
