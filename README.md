@@ -27,8 +27,8 @@ Installing Jupiter on Amazon EC2
   cd ~
   sed -i "1 a\
   config = get_config()\\
-  config.NotebookApp.certfile = u'$certdir/mycert.pem'\\
-  config.NotebookApp.keyfile = u'$certdir/mycert.key'\\
+  config.NotebookApp.certfile = u'$certdir/my.pem'\\
+  config.NotebookApp.keyfile = u'$certdir/my.key'\\
   config.NotebookApp.ip = '*'\\
   config.NotebookApp.open_browser = False\\
   config.NotebookApp.password = u'$key'\\
@@ -76,11 +76,11 @@ After launching your instance g2.2xlarge  using the Ubuntu Server 14, install th
   sudo apt-get install gcc
   sudo apt-get install g++
   sudo apt-get install git
-  sudo git clone https://github.com/dmlc/xgboost
-  cd xgboost
-  ./build.sh
-  cd python-package
-  python setup.py install
+  git clone --recursive https://github.com/dmlc/xgboost
+  cd xgboost; cp make/config.mk ./config.mk; make -j4
+  cd python3-package
+  sudo python3 setup.py install
+  conda install libgcc
   wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
  ```
  
@@ -101,5 +101,12 @@ After launching your instance g2.2xlarge  using the Ubuntu Server 14, install th
  The output of lsblk removes the /dev/ prefix from full device paths. In this example, /dev/xvda1 is mounted as the root device (note the MOUNTPOINT is listed as /, the root of the Linux file system hierarchy), and /dev/xvdf is attached, but it has not been mounted yet.
  3. Determine whether you need to create a file system on the volume. Use the sudo file -s device command to list special information, such as file system type.
  '''
- 
+  sudo mount /dev/xvdb ./notebook_root/
+  sudo cp /etc/fstab /etc/fstab.orig
+  vi /etc/fstab
+  sudo vi /etc/fstab
+  cd notebook_root/
+  pwd
+  sudo vi /etc/fstab
+  df
  '''
