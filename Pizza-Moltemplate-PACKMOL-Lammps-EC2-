@@ -1,5 +1,5 @@
 
-
+(source: http://www.moltemplate.org/)
 
 LAMMPS is an extremely flexible and customizable molecular dynamics engine. Moltemplate is a general 
 cross-platform text-based molecule builder for LAMMPS. Moltemplate was designed for building complex 
@@ -10,8 +10,28 @@ by modifying the LAMMPS source code. Molecules can be copied, combined, and link
 to define new molecules. Once built, individual molecules and subunits can be customized (atoms, bonds, and 
 subunits can be moved and deleted). 
 
+Coarse-grained molecular models often require more complex and unconventional force fields, compared to traditional 
+all-atom models. The LAMMPS and MOLTEMPLATE programs allow users extraordinary freedom to customize the forces acting 
+on the atoms in a molecule. Users can also combine radically different molecular representations together including 
+point-like, rigid, and continuum-field/atomistic hybrids. The LAMMPS code is open-source and written in a modular style 
+so that new force fields and features can be easily added by end users. (And moltemplate is written in a style to easily 
+accommodate these changes.)
 
-http://www.moltemplate.org/doc/moltemplate_manual.pdf
+## Installation - Moltemplate
+If  you  don't  already  have  moltemplate
+, the most up-to-date version can be downloaded at http://www.moltemplate.org
+If you obtained moltemplate as a .tar.gz  le, (as opposed to github), you can unpack it using:
+tar -xzvf moltemplate_2016-11-21.tar.gz
+(The date will vary from version to version.)  Alternately, if you obtained
+moltemplate bundled with LAMMPS, then the \moltemplate" directory will probably be located in the
+\tools" subdirectory of your lammps installation.
+
+### Installation Method 2
+An alternate way to install moltemplate is to simply copy the entire
+contents of moltemplate's \src" subdirectory into a directory which is already in your
+path, such as /usr/local/bin.  
+
+(source: http://www.moltemplate.org/doc/moltemplate_manual.pdf)
 
 Moltemplate is a general molecule builder and force-field database system
 for LAMMPS. A simple  file format has been created to store molecule def-
