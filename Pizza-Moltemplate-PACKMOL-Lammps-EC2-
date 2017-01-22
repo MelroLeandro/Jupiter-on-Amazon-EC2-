@@ -1,0 +1,187 @@
+
+
+
+LAMMPS is an extremely flexible and customizable molecular dynamics engine. Moltemplate is a general 
+cross-platform text-based molecule builder for LAMMPS. Moltemplate was designed for building complex 
+coarse-grained toy models, but it can be used to prepare realistic all-atom simulations as well. It 
+currently supports the OPLS, AMBER/GAFF, TraPPE(1998), and mW force fields. However it can be used to 
+build molecules using any of the force fields available in LAMMPS, including new force fields created 
+by modifying the LAMMPS source code. Molecules can be copied, combined, and linked together as building-blocks 
+to define new molecules. Once built, individual molecules and subunits can be customized (atoms, bonds, and 
+subunits can be moved and deleted). 
+
+
+http://www.moltemplate.org/doc/moltemplate_manual.pdf
+
+Moltemplate is a general molecule builder and force-field database system
+for LAMMPS. A simple  file format has been created to store molecule def-
+initions and force-fields (the LAMMPS-template format, LT).  LT  files are
+templates containing all of the text relevant to a particular molecule (includ-
+ing coordinates, bond-topology, angles, force-field parameters, constraints,
+groups and  fixes).  Moltemplate can then duplicate the molecule, customize
+it,  and  use  it  as  a  building-block  for  constructing  larger,  more  complex
+molecules.  (These molecules can be used to build even larger molecules.)
+Once  built,  individual  molecules  and  subunits  can  be  customized  (atoms
+and bonds, and subunits can be inserted, moved, deleted and/or replaced).
+
+Moltemplate is extremely  exible.  It supports all LAMMPS force-field
+styles and nearly all atom-styles (now and in the future).
+
+Moltemplate requires the Bourne-shell, and a recent version of python (2.7 or 3.0 or higher), 
+and can run on OS X, linux, or windows (if a suitable shell environment has been installed).
+A substantial amount of memory is needed to run moltemplate.  For example, building a system of 1000000
+atoms typically requires between 3 and 12 GB of available memory.  (This
+depends on the number of bonds, molecules, and angular interactions.  See
+section 10 for details.)
+
+### Converting LT  files to LAMMPS input/data  files
+
+The moltemplate.sh program converts LT-files (which contain molecule def-
+initions) into complete LAMMPS input-scripts and data-files:
+
+moltemplate.sh -atomstyle "full" system.lt
+
+or
+
+moltemplate.sh -xyz coords.xyz -atomstyle "full" -vmd system.lt
+
+In the  first example, the coordinates of the atoms in the system are built from
+commands inside the "system.lt"  file.  In the second example coordinates for
+the atoms are read from an XYZ-file,  and then invokes VMD to visualize
+the system just created.  (PDB-files and other coordinate formats are also
+supported.  Note:  The "full" atom style was used in this example, but other
+LAMMPS atom styles are supported, including hybrid styles.)
+Either  of  these  commands  will  construct  a  LAMMPS  data  file  and  a
+LAMMPS input script (and possibly one or more auxiliary input files), which
+can be directly run in LAMMPS with minimal editing.
+
+###   Converting LAMMPS input/data  files to LT  files
+Existing LAMMPS input/data  files can be converted into \.LT"  files using
+the \ltemplify.py" utility.  (Some additional manual editing may be required.
+See appendix B.)
+
+*Additional tools*
+The VMD topotools plugin [1] is useful for converting PDB  files into LAMMPS
+format.  These  files can then be converted to \LT" format using the \ltem-
+plify.py" utility.  VMD [2] and topotools are also useful for visualizing the
+data  files created by moltemplate.sh (See section 4.3.)
+The PACKMOL [3] program is useful for generating coordinates of dense
+heterogeneous  mixtures  of  molecules,  which  can  be  read  by  moltemplate.
+(The VMD \solvate" plugin may also be helpful.)
+
+
+
+
+
+## Pizza 
+
+(source: http://pizza.sandia.gov/FAQ.html)
+
+Pizza.py is a loosely integrated collection of tools written in Python, many of which provide pre- and post-processing capability
+for the LAMMPS molecular dynamics package. There are tools to create input files, convert between file formats, process log 
+and dump files, create plots, and visualize and animate simulation snapshots. Eventually it will include tools for other
+simulations as well.
+
+More generally, Pizza.py is two things. The top-level of Pizza.py extends the Python interpreter in a few simple ways to make 
+it easier to invoke shell commands, launch scripts, and query help on tools. Secondly, the Pizza.py tools are Python modules 
+designed with interfaces that allow them to interact with and/or replace each other in simple, yet powerful ways. 
+
+Pizza.py can be used in several different ways:
+
+    - via interactive typing, to examine simulation data sets
+    - via scripts to perform analysis with Pizza.py tools
+    - via scripts to automate repetitive tasks
+    - via tool GUIs to interact with simulation data 
+
+Other than a few basic syntax rules, you do not need to know any Python to use Pizza.py tools. However, if you are familiar 
+with Python, you will be able to use the tools in more sophisticated ways, write your own scripts for analysis purposes, 
+add methods to existing tools, or even create new tools of your own.
+
+A Pizza.py tool (just a *.py file) can be used directly in Python, without the rest of Pizza.py. Pizza.py scripts can be 
+run by others, who don't have Pizza.py, to run in their Python (so long as you also give them any tool files the script uses).
+
+New tools you write need not have anything to do with LAMMPS. They could be a stand-alone tool or interact with existing 
+Pizza.py tools in various ways. For example, you could write a new tool that
+
+    - reads your files and creates plots via Pizza.py plotting tools
+    - reads your simulation output and creates images via Pizza.py viz tools
+    - creates an atomisitc geometry and creates a LAMMPS data file via the data tool 
+
+## MATLAB
+
+MatLab is a commercial numerical analysis program that does many, many things, one of which is make nice plots. 
+The Pizza.py matlab tool wraps the plotting functionality in MatLab with the same interface as it does GnuPlot. 
+So you can do exactly the same things with MatLab plots as listed in the previoue FAQ question for GnuPlot, i.e. 
+creating MatLab plots instead of GnuPlot plots is as simple as changing one line in your script.
+
+As with GnuPlot, you can drive MatLab interactively either one-command-at-a-time or via the MatLab shell (as if 
+you were typing at the MatLab prompt). This means your Python and LAMMPS data can be exported to MatLab (as a file), 
+and you can then operate on it with any MatLab commands or functions you wish. 
+
+## pdbfile tool
+
+Purpose:
+
+Read, write PDB files in combo with LAMMPS snapshots.
+
+Description:
+
+The pdbfile tool reads in PDB (Protein Data Bank) files of protein coordinates and uses them in conjunction with LAMMPS 
+snapshots in various ways. The PDB format is commonly used by various vizualization and analysis programs.
+
+The pdbfile constructor takes a string argument listing one or more PDB filenames and a data argument with LAMMPS 
+atom information (data or dump object). The atom snapshots must have "id", "type", "x", "y", and "z" defined; see the map() 
+methods of those tools.
+
+Both arguments to the constructor are optional, as described below. If a single PDB file is given as a constructor argument, 
+and it is 4 letters long, and it does not exist on your system, then it is treated as a PDB identifier and the matching PDB 
+file is downloaded from a PDB repository on the WWW to your machine.
+
+The one(), many(), and single() methods write out PDB files in various manners, depending on the 1 or 2 arguments used in the
+constructor. If only a string was specified (no data object), the specified PDB files are written out as-is. Thus the one()
+method concatenates the files together. If only a data object was specified (no string of PDB files), then PDB files in a 
+generic format (Lennard-Jones atoms) are created. If both arguments are specified, then only a single PDB file can be listed. 
+It is treated as a template file, and the atom coordinates in the data object replace the atom coordinates in the template PDB 
+file to create a series of new PDB files. This replacement is only done for selected atoms (in the dump object) and for atom 
+IDs that appear in the PDB file.
+
+The iterator() method is called by the rasmol tool to create a series of PDB files for visualization purposes.
+
+Usage:
+
+p = pdbfile("3CRO")         create pdb object from PDB file or WWW
+p = pdbfile("pep1 pep2")    read in multiple PDB files
+p = pdbfile("pep*")         can use wildcards
+p = pdbfile(d)              read in snapshot data with no PDB file
+p = pdbfile("3CRO",d)       read in single PDB file with snapshot data 
+
+  string arg contains one or more PDB files
+    don't need .pdb suffix except wildcard must expand to file.pdb
+    if only one 4-char file specified and it is not found,
+      it will be downloaded from http://www.rcsb.org as 3CRO.pdb
+  d arg is object with atom coordinates (dump, data) 
+
+p.one()                     write all output as one big PDB file to tmp.pdb
+p.one("mine")               write to mine.pdb
+p.many()                    write one PDB file per snapshot: tmp0000.pdb, ...
+p.many("mine")              write as mine0000.pdb, mine0001.pdb, ...
+p.single(N)                 write timestamp N as tmp.pdb
+p.single(N,"new")           write as new.pdb 
+
+  how new PDB files are created depends on constructor inputs:
+    if no d: one new PDB file for each file in string arg (just a copy)
+    if only d specified: one new PDB file per snapshot in generic format
+    if one file in str arg and d: one new PDB file per snapshot
+      using input PDB file as template
+    multiple input PDB files with a d is not allowed 
+
+index,time,flag = p.iterator(0)
+index,time,flag = p.iterator(1) 
+
+  iterator = loop over number of PDB files
+    call first time with arg = 0, thereafter with arg = 1
+    N = length = # of snapshots or # of input PDB files
+    index = index of snapshot or input PDB file (0 to N-1)
+    time = timestep value (time stamp for snapshot, index for multiple PDB)
+    flag = -1 when iteration is done, 1 otherwise
+  typically call p.single(time) in iterated loop to write out one PDB file 
