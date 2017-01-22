@@ -90,6 +90,58 @@ heterogeneous  mixtures  of  molecules,  which  can  be  read  by  moltemplate.
 (The VMD \solvate" plugin may also be helpful.)
 
 
+## Running  a  LAMMPS  simulation  (after  using  moltemplate)
+
+To  run  a  simulation  of  one  or  more  molecules,  LAMMPS  requires  an
+input  script and a data file.  Input scripts typically contain force  eld styles,
+parameters  and run  settings.  (They sometimes  also  contain atom  coordi-
+nates.)  Data  files typically contain atom coordinates and bonded topology
+data.  (They sometimes also contain force-field parameters.)
+
+Moltemplate will create the following  files:  \system.data", \system.in",
+\system.in.init",  \system.in.settings",  (and  possibly  other   files  including
+\system.in.coords").   These  are  LAMMPS  input/data   les,  and  they  can
+be run in LAMMPS with minimal modi cation (see below).  The main in-
+put script  le is named \system.in", and it usually contains just three lines:
+
+include   "system.in.init"
+read_data "system.data"
+include   "system.in.settings"
+
+To run a simulation, you will have to edit this  file in order to add a couple
+of  run  commands.   These  commands  tell  LAMMPS  about  the  simulation
+conditions  you  want  to  use  (temperature,  pressure),  how  long  to  run  the
+simulation, how to integrate the equations of motion, and how to write the
+results to a  file ( le format, frequency, etc).  Moltemplate.sh can not do this
+for you.  Some simple examples (which you can paste into your input script)
+are provided in the online  examples which can be downloaded from
+http://moltemplate.org.   (These  example  input  scripts  typically  have  names
+like \run.in.nvt" and \run.in.npt".)
+
+##  Visualizing Trajectories
+
+After you have run a simulation in LAMMPS, there are several programs
+which can visualize the system. If you have saved your trajectory in LAMMPS
+\dump"  format,  later  you  can  view  it  in  VMD  [2].   For  the  purpose  of
+viewing trajectories in LAMMPS, I recommend using the following style of
+\dump"  commands  in  the  LAMMPS  input-script  that  you  use  when  you
+run LAMMPS:
+dump 1 all custom 1000 DUMP_FILE.lammpstrj id mol type x y z ix iy iz
+
+(The \all" and \1000", refer to the atom selection and save interval, which
+may di er depending on the kind of simulation you are running.  See
+http://lammps.sandia.gov/doc/dump.html
+for details.)
+
+Once you have a dump  le, you can view it in VMD using:
+a) Start VMD From the menu in the upper-left, select File -> New Molecule
+b) Browse to select the PSF  le you created above, and load it.  (Don't
+close the window yet.)
+c)  Browse  to  select  the  trajectory   le.   If  necessary,  for  " file  type"
+select:  "LAMMPS Trajectory".  Click on OK.
+d) Click on the Load button.
+
+## Examples
 
 
 
